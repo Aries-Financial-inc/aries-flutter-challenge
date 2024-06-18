@@ -1,0 +1,17 @@
+{
+  "dart.openDevTools": "never",
+  "dart.sdkPath": "/.fvm/flutter_sdk",
+  // Remove .fvm files from search
+  "search.exclude": {
+    "**/.fvm": true
+  },
+  // Remove from file watching
+  "files.watcherExclude": {
+    "**/.fvm": true
+  },
+  "git.ignoreLimitWarning": true,
+  "editor.inlineSuggest.showToolbar": "always",
+  "dart.analysisExcludedFolders": [
+    "bricks"
+  ]
+}
