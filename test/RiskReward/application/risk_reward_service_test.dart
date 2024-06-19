@@ -112,47 +112,56 @@ void main() {
     expectPayoffData(result, expected);
   });
 
-  test('Calculate Combined Payoff for Multiple Options', () {
-    var optionsData = [
-      OptionData(
-        type: 'Call',
-        strikePrice: 100,
-        bid: 10.05,
-        ask: 12.04,
-        longShort: 'long',
-        expirationDate: DateTime.parse('2025-12-17'),
-      ),
-      OptionData(
-        type: 'Put',
-        strikePrice: 105,
-        bid: 16.00,
-        ask: 18.00,
-        longShort: 'short',
-        expirationDate: DateTime.parse('2025-12-17'),
-      )
-    ];
+  group('calculateCombinedPayoffs', () {
+    test('returns correct combined payoffs for a list of options', () {
+      final options = [
+        OptionData(
+          type: 'Call',
+          strikePrice: 100.0,
+          bid: 10.05,
+          ask: 12.04,
+          longShort: 'long',
+          expirationDate: DateTime.parse('2025-12-17'),
+        ),
+        OptionData(
+          type: 'Put',
+          strikePrice: 105.0,
+          bid: 16.0,
+          ask: 18.0,
+          longShort: 'long',
+          expirationDate: DateTime.parse('2025-12-17'),
+        ),
+      ];
+      final minUnderlyingPrice = 95.0;
+      final maxUnderlyingPrice = 110.0;
 
-    var minUnderlyingPrice = 90.0;
-    var maxUnderlyingPrice = 120.0;
+      final result = riskRewardService.calculateCombinedPayoffs(
+          options, minUnderlyingPrice, maxUnderlyingPrice);
 
-    var result = riskRewardService.calculateCombinedPayoffs(
-        optionsData, minUnderlyingPrice, maxUnderlyingPrice);
+      expect(result.length, 500);
+      expect(result.first.underlyingPrice, minUnderlyingPrice);
+      expect(result.last.underlyingPrice, maxUnderlyingPrice);
 
-    // Expected values for verification
-    var expected = [
-      PayoffData(90, -12.04 + 16),
-      PayoffData(100, -12.04 + 16),
-      PayoffData(105, -12.04 + 0),
-      PayoffData(110, -2.04 + (16 - 5)),
-      PayoffData(120, 7.96 + (16 - 15))
-    ];
+      // Calculate the expected combined payoffs manually for a few points
+      expect(result.first.payoff, 10.0); // at underlyingPrice = 95.0
+      expect(result[250].payoff, -2.5); // at underlyingPrice = 102.5
+      expect(result.last.payoff, 5.0); // at underlyingPrice = 110.0
+    });
 
-    // Compare the result with expected values at specific points to verify correctness
-    expectPayoffData(
-        result
-            .where((data) => [90.0, 100.0, 105.0, 110.0, 120.0]
-                .contains(data.underlyingPrice))
-            .toList(),
-        expected);
+    test('returns correct combined payoffs for an empty list of options', () {
+      List<OptionData> options = <OptionData>[];
+      final minUnderlyingPrice = 95.0;
+      final maxUnderlyingPrice = 110.0;
+
+      final result = riskRewardService.calculateCombinedPayoffs(
+          options, minUnderlyingPrice, maxUnderlyingPrice);
+
+      expect(result.length, 500);
+      expect(result.first.underlyingPrice, minUnderlyingPrice);
+      expect(result.last.underlyingPrice, maxUnderlyingPrice);
+      expect(result.every((payoffData) => payoffData.payoff == 0.0), isTrue);
+    });
+
+    // Add more tests for different scenarios
   });
 }
