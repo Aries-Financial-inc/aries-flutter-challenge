@@ -107,4 +107,32 @@ class RiskRewardService {
           : charts.MaterialPalette.red.shadeDefault.lighter;
     }
   }
+
+  List<charts.LineAnnotationSegment<Object>> createAnnotations(
+      List<OptionData> optionsData) {
+    List<charts.LineAnnotationSegment<Object>> annotations = [];
+
+    // Add vertical lines for strike prices
+    for (var option in optionsData) {
+      var color = getColorBasedOnTypeAndPosition(option);
+      annotations.add(charts.LineAnnotationSegment(
+        option.strikePrice,
+        charts.RangeAnnotationAxisType.domain,
+        color: color,
+        dashPattern: [4, 4],
+        startLabel: '${option.strikePrice}',
+      ));
+    }
+
+    // Add horizontal lines for breakeven points (where payoff is zero)
+    annotations.add(charts.LineAnnotationSegment(
+      0,
+      charts.RangeAnnotationAxisType.measure,
+      startLabel: 'Breakeven',
+      color: charts.MaterialPalette.gray.shade300,
+      dashPattern: [4, 4],
+    ));
+
+    return annotations;
+  }
 }
