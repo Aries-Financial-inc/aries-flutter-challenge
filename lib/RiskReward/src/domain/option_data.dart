@@ -6,11 +6,12 @@ class OptionData {
   final String longShort;
   final DateTime expirationDate;
 
-  OptionData(
-      {required this.strikePrice,
-      required this.type,
-      required this.bid,
-      required this.ask,
-      required this.longShort,
-      required this.expirationDate});
+  OptionData({
+    required this.strikePrice,
+    required this.type,
+    required this.bid,
+    required this.ask,
+    required this.longShort,
+    required this.expirationDate,
+  });
 }

@@ -21,6 +21,12 @@ class RiskRewardChart extends StatelessWidget {
             child: Text('No options data'),
           )
         : charts.LineChart(riskRewardService.mapOptionData(optionsData),
+            domainAxis: charts.NumericAxisSpec(
+              viewport: charts.NumericExtents(
+                riskRewardService.minUnderlyingPrice(optionsData) - 10,
+                riskRewardService.maxUnderlyingPrice(optionsData) + 10,
+              ),
+            ),
             animate: true);
   }
 }
