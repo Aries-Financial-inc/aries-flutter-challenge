@@ -81,7 +81,18 @@ class _OptionsCalculatorState extends State<OptionsCalculator> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Options Profit Calculator"),
       ),
-      body: SafeArea(child: RiskRewardChart()),
+      body: SafeArea(
+          child: RiskRewardChart(
+        optionsData: optionsData.map((el) {
+          return OptionData(
+              strikePrice: double.parse(el["strike_price"].toString()),
+              type: el["type"],
+              bid: double.parse(el["bid"].toString()),
+              ask: double.parse(el["ask"].toString()),
+              longShort: el["long_short"],
+              expirationDate: DateTime.parse(el["expiration_date"]));
+        }).toList(),
+      )),
     );
   }
 }

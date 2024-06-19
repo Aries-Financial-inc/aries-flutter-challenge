@@ -1,41 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:community_charts_flutter/community_charts_flutter.dart'
     as charts;
-
-/// Sample linear data type.
-class LinearSales {
-  final int year;
-  final int sales;
-
-  LinearSales(this.year, this.sales);
-}
+import 'package:flutter_challenge/RiskReward/src/application/risk_reward_service.dart';
+import 'package:flutter_challenge/RiskReward/src/domain/option_data.dart';
 
 class RiskRewardChart extends StatelessWidget {
-  const RiskRewardChart({super.key});
+  final List<OptionData> optionsData;
+  final RiskRewardService riskRewardService;
 
-  /// Create one series with sample hard coded data.
-  static List<charts.Series<LinearSales, int>> _createSampleData() {
-    final data = [
-      LinearSales(0, 5),
-      LinearSales(1, 25),
-      LinearSales(2, 100),
-      LinearSales(3, 75),
-    ];
-
-    return [
-      charts.Series<LinearSales, int>(
-        id: 'Sales',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (LinearSales sales, _) => sales.year,
-        measureFn: (LinearSales sales, _) => sales.sales,
-        data: data,
-      )
-    ];
-  }
+  RiskRewardChart({
+    super.key,
+    this.optionsData = const [],
+    RiskRewardService? riskRewardServiceInstance,
+  }) : riskRewardService = riskRewardServiceInstance ?? RiskRewardService();
 
   @override
   Widget build(BuildContext context) {
-    final seriesList = _createSampleData();
-    return charts.LineChart(seriesList, animate: true);
+    return optionsData.isEmpty
+        ? const Center(
+            child: Text('No options data'),
+          )
+        : charts.LineChart(riskRewardService.mapOptionData(optionsData),
+            animate: true);
   }
 }
