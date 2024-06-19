@@ -5,34 +5,46 @@ import 'package:community_charts_flutter/community_charts_flutter.dart'
     as charts;
 
 class RiskRewardService {
-  double minUnderlyingPrice(List optionsData) => optionsData
-      .map((option) => option.strikePrice)
-      .reduce((a, b) => a < b ? a : b);
+  double minUnderlyingPrice(List<OptionData> optionsData) {
+    double minStrike = optionsData
+        .map((option) => option.strikePrice)
+        .reduce((a, b) => a < b ? a : b);
+    return minStrike * 0.5; // Adding 30% buffer below the min strike price
+  }
 
-  double maxUnderlyingPrice(List optionsData) => optionsData
-      .map((option) => option.strikePrice)
-      .reduce((a, b) => a > b ? a : b);
+  double maxUnderlyingPrice(List<OptionData> optionsData) {
+    double maxStrike = optionsData
+        .map((option) => option.strikePrice)
+        .reduce((a, b) => a > b ? a : b);
+    return maxStrike * 1.5; // Adding 30% buffer above the max strike price
+  }
 
   double maxProfit(List<PayoffData> payoffs) =>
       payoffs.map((data) => data.payoff).reduce((a, b) => a > b ? a : b);
   double maxLoss(List<PayoffData> payoffs) =>
       payoffs.map((data) => data.payoff).reduce((a, b) => a < b ? a : b);
 
-  List<double> calculateBreakEvenPoints(List<PayoffData> payoffs) {
-    print('Payoffs: $payoffs');
+  List<double> calculateBreakEvenPoints(List<PayoffData> combinedPayoff) {
     List<double> breakEvenPoints = [];
-    for (int i = 0; i < payoffs.length - 1; i++) {
-      if (payoffs[i].payoff == 0) {
-        breakEvenPoints.add(payoffs[i].underlyingPrice);
-      } else if (payoffs[i].payoff * payoffs[i + 1].payoff < 0) {
-        double x1 = payoffs[i].underlyingPrice;
-        double y1 = payoffs[i].payoff;
-        double x2 = payoffs[i + 1].underlyingPrice;
-        double y2 = payoffs[i + 1].payoff;
-        double breakEvenPoint = x1 - y1 * (x2 - x1) / (y2 - y1);
-        breakEvenPoints.add(breakEvenPoint);
+
+    for (int i = 0; i < combinedPayoff.length - 1; i++) {
+      double currentPayoff = combinedPayoff[i].payoff;
+      double nextPayoff = combinedPayoff[i + 1].payoff;
+
+      // Check if there's a sign change between current and next payoff
+      if ((currentPayoff > 0 && nextPayoff < 0) ||
+          (currentPayoff < 0 && nextPayoff > 0)) {
+        // Linearly interpolate to find the exact break-even point
+        double underlyingPrice1 = combinedPayoff[i].underlyingPrice;
+        double underlyingPrice2 = combinedPayoff[i + 1].underlyingPrice;
+        double breakEvenPrice = underlyingPrice1 -
+            currentPayoff *
+                (underlyingPrice2 - underlyingPrice1) /
+                (nextPayoff - currentPayoff);
+        breakEvenPoints.add(breakEvenPrice);
       }
     }
+
     return breakEvenPoints;
   }
 
@@ -43,44 +55,41 @@ class RiskRewardService {
   /// Returns a list of [PayoffData] containing the underlying prices and their corresponding payoffs.
   List<PayoffData> calculatePayoff(
       OptionData option, List<double> underlyingPrices) {
-    List<PayoffData> payoffData = [];
+    List<PayoffData> payoffs = [];
 
-    for (var price in underlyingPrices) {
-      double payoff;
-
-      if (option.longShort == 'long') {
-        double premium = option.ask;
-
-        if (option.type == 'Call') {
-          payoff = price <= option.strikePrice
-              ? -premium
-              : price - option.strikePrice - premium;
-        } else {
-          // Put
-          payoff = price >= option.strikePrice
-              ? -premium
-              : option.strikePrice - price - premium;
+    for (double underlyingPrice in underlyingPrices) {
+      double payoff = 0.0;
+      if (option.type == 'Call') {
+        if (option.longShort == 'long') {
+          payoff =
+              (underlyingPrice - option.strikePrice).clamp(0, double.infinity) -
+                  option.ask;
+        } else if (option.longShort == 'short') {
+          payoff = option.bid -
+              (underlyingPrice - option.strikePrice).clamp(0, double.infinity);
         }
-      } else {
-        // short position
-        double premium = option.bid;
-
-        if (option.type == 'Call') {
-          payoff = price <= option.strikePrice
-              ? premium
-              : premium - (price - option.strikePrice);
-        } else {
-          // Put
-          payoff = price >= option.strikePrice
-              ? premium
-              : premium - (option.strikePrice - price);
+      } else if (option.type == 'Put') {
+        if (option.longShort == 'long') {
+          payoff =
+              (option.strikePrice - underlyingPrice).clamp(0, double.infinity) -
+                  option.ask;
+        } else if (option.longShort == 'short') {
+          payoff = option.bid -
+              (option.strikePrice - underlyingPrice).clamp(0, double.infinity);
         }
       }
-
-      payoffData.add(PayoffData(price, payoff));
+      // Ensure long positions do not go negative
+      if (option.longShort == 'long' && payoff < -option.ask) {
+        payoff = -option.ask;
+      }
+      // Ensure short positions do not go below zero
+      if (option.longShort == 'short' && payoff < 0) {
+        payoff = 0;
+      }
+      payoffs.add(PayoffData(underlyingPrice, payoff));
     }
 
-    return payoffData;
+    return payoffs;
   }
 
   /// Calculates the combined payoffs for a list of options over a range of underlying prices.
@@ -107,6 +116,7 @@ class RiskRewardService {
         totalPayoff += payoffs.first.payoff;
       }
 
+      print('Price: $price, Total Payoff: $totalPayoff');
       combinedPayoff.add(PayoffData(price, totalPayoff));
     }
 

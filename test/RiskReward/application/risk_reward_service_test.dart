@@ -132,8 +132,8 @@ void main() {
           expirationDate: DateTime.parse('2025-12-17'),
         ),
       ];
-      final minUnderlyingPrice = 95.0;
-      final maxUnderlyingPrice = 110.0;
+      final minUnderlyingPrice = 80.0; // Extended range
+      final maxUnderlyingPrice = 120.0; // Extended range
 
       final result = riskRewardService.calculateCombinedPayoffs(
           options, minUnderlyingPrice, maxUnderlyingPrice);
@@ -143,9 +143,9 @@ void main() {
       expect(result.last.underlyingPrice, maxUnderlyingPrice);
 
       // Calculate the expected combined payoffs manually for a few points
-      expect(result.first.payoff, 10.0); // at underlyingPrice = 95.0
-      expect(result[250].payoff, -2.5); // at underlyingPrice = 102.5
-      expect(result.last.payoff, 5.0); // at underlyingPrice = 110.0
+      expect(result.first.payoff, -20.04); // at underlyingPrice = 80.0
+      expect(result[250].payoff, -25.04); // at underlyingPrice = 100.0
+      expect(result.last.payoff, -7.04); // at underlyingPrice = 120.0
     });
 
     test('returns correct combined payoffs for an empty list of options', () {

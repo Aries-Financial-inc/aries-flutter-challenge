@@ -106,10 +106,13 @@ class RiskRewardChart extends StatelessWidget {
       ],
       defaultRenderer: charts.LineRendererConfig(includePoints: true),
       domainAxis: charts.NumericAxisSpec(
-        viewport: charts.NumericExtents(
-          riskRewardService.minUnderlyingPrice(optionsData) - 5,
-          riskRewardService.maxUnderlyingPrice(optionsData) + 5,
-        ),
+        viewport: breakEvenPoints.length > 1
+            ? charts.NumericExtents(
+                breakEvenPoints.first - 5, breakEvenPoints.last + 5)
+            : charts.NumericExtents(
+                riskRewardService.minUnderlyingPrice(optionsData) - 5,
+                riskRewardService.maxUnderlyingPrice(optionsData) + 5,
+              ),
         tickProviderSpec:
             const charts.BasicNumericTickProviderSpec(zeroBound: false),
       ),
