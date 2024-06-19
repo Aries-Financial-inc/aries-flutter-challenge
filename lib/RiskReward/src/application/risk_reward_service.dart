@@ -36,6 +36,11 @@ class RiskRewardService {
     return breakEvenPoints;
   }
 
+  /// Calculates the payoff for a given option over a range of underlying prices.
+  ///
+  /// [option] The option data which includes type, strike price, bid, ask, and position.
+  /// [underlyingPrices] A list of underlying prices to calculate the payoff for.
+  /// Returns a list of [PayoffData] containing the underlying prices and their corresponding payoffs.
   List<PayoffData> calculatePayoff(
       OptionData option, List<double> underlyingPrices) {
     List<PayoffData> payoffData = [];
@@ -78,6 +83,12 @@ class RiskRewardService {
     return payoffData;
   }
 
+  /// Calculates the combined payoffs for a list of options over a range of underlying prices.
+  ///
+  /// [optionsData] A list of option data which includes type, strike price, bid, ask, and position.
+  /// [minUnderlyingPrice] The minimum underlying price to consider.
+  /// [maxUnderlyingPrice] The maximum underlying price to consider.
+  /// Returns a list of [PayoffData] containing the underlying prices and their corresponding combined payoffs.
   List<PayoffData> calculateCombinedPayoffs(List<OptionData> optionsData,
       double minUnderlyingPrice, double maxUnderlyingPrice) {
     final underlyingPrices = List.generate(
@@ -85,17 +96,20 @@ class RiskRewardService {
         (index) =>
             minUnderlyingPrice +
             index * (maxUnderlyingPrice - minUnderlyingPrice) / 499);
-    print('Underlying prices: $underlyingPrices');
+
     List<PayoffData> combinedPayoff = [];
+
     for (var price in underlyingPrices) {
-      List<double> individualPayoffs = [];
+      double totalPayoff = 0.0;
+
       for (var option in optionsData) {
         final payoffs = calculatePayoff(option, [price]);
-        individualPayoffs.add(payoffs.first.payoff);
+        totalPayoff += payoffs.first.payoff;
       }
-      double totalPayoff = individualPayoffs.reduce((a, b) => a + b);
+
       combinedPayoff.add(PayoffData(price, totalPayoff));
     }
+
     return combinedPayoff;
   }
 
