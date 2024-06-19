@@ -1,4 +1,9 @@
+import 'package:flutter_challenge/blocs/options/options_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'ui/options/home_page.dart';
+import 'values/app_themes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,80 +12,17 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Options Profit Calculator',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+      title: 'Flutter Demo',
+      theme: AppTheme.getLightThemeData(Brightness.light),
+      debugShowCheckedModeBanner: false,
+      home: BlocProvider(
+        create: (context) => OptionsBloc(),
+        child: const HomePage(),
       ),
-      home: const OptionsCalculator(optionsData: [
-        {
-          "strike_price": 100, 
-          "type": "Call", 
-          "bid": 10.05, 
-          "ask": 12.04, 
-          "long_short": "long", 
-          "expiration_date": "2025-12-17T00:00:00Z"
-        },
-        {
-          "strike_price": 102.50, 
-          "type": "Call", 
-          "bid": 12.10, 
-          "ask": 14, 
-          "long_short": "long", 
-          "expiration_date": "2025-12-17T00:00:00Z"
-        },
-        {
-          "strike_price": 103, 
-          "type": "Put", 
-          "bid": 14, 
-          "ask": 15.50, 
-          "long_short": "short", 
-          "expiration_date": "2025-12-17T00:00:00Z"
-        },
-        {
-          "strike_price": 105, 
-          "type": "Put", 
-          "bid": 16, 
-          "ask": 18, 
-          "long_short": "long", 
-          "expiration_date": "2025-12-17T00:00:00Z"
-        }
-      ]),
-    );
-  }
-}
-
-class OptionsCalculator extends StatefulWidget {
-  const OptionsCalculator({super.key, required this.optionsData});
-
-  final List<Map<String, dynamic>> optionsData;
-
-  @override
-  State<OptionsCalculator> createState() => _OptionsCalculatorState();
-}
-
-class _OptionsCalculatorState extends State<OptionsCalculator> {
-  List<Map<String, dynamic>> optionsData = [];
-
-  @override
-  void initState() {
-    super.initState();
-    optionsData = widget.optionsData;
-  }
-
-  // Your code here
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Options Profit Calculator"),
-      ),
-      body: const Text("Your code here")
     );
   }
 }
