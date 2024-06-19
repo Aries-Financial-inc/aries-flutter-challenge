@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_challenge/RiskReward/flutter_risk_reward_chart.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,35 +18,35 @@ class MyApp extends StatelessWidget {
       ),
       home: const OptionsCalculator(optionsData: [
         {
-          "strike_price": 100, 
-          "type": "Call", 
-          "bid": 10.05, 
-          "ask": 12.04, 
-          "long_short": "long", 
+          "strike_price": 100,
+          "type": "Call",
+          "bid": 10.05,
+          "ask": 12.04,
+          "long_short": "long",
           "expiration_date": "2025-12-17T00:00:00Z"
         },
         {
-          "strike_price": 102.50, 
-          "type": "Call", 
-          "bid": 12.10, 
-          "ask": 14, 
-          "long_short": "long", 
+          "strike_price": 102.50,
+          "type": "Call",
+          "bid": 12.10,
+          "ask": 14,
+          "long_short": "long",
           "expiration_date": "2025-12-17T00:00:00Z"
         },
         {
-          "strike_price": 103, 
-          "type": "Put", 
-          "bid": 14, 
-          "ask": 15.50, 
-          "long_short": "short", 
+          "strike_price": 103,
+          "type": "Put",
+          "bid": 14,
+          "ask": 15.50,
+          "long_short": "short",
           "expiration_date": "2025-12-17T00:00:00Z"
         },
         {
-          "strike_price": 105, 
-          "type": "Put", 
-          "bid": 16, 
-          "ask": 18, 
-          "long_short": "long", 
+          "strike_price": 105,
+          "type": "Put",
+          "bid": 16,
+          "ask": 18,
+          "long_short": "long",
           "expiration_date": "2025-12-17T00:00:00Z"
         }
       ]),
@@ -80,7 +81,7 @@ class _OptionsCalculatorState extends State<OptionsCalculator> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Options Profit Calculator"),
       ),
-      body: const Text("Your code here")
+      body: SafeArea(child: RiskRewardChart()),
     );
   }
 }
