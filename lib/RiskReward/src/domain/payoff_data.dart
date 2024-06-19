@@ -1,6 +1,12 @@
-class PayoffData {
+// ignore: depend_on_referenced_packages
+import 'package:equatable/equatable.dart';
+
+class PayoffData extends Equatable {
   final double underlyingPrice;
   final double payoff;
 
-  PayoffData(this.underlyingPrice, this.payoff);
+  const PayoffData(this.underlyingPrice, this.payoff);
+
+  @override
+  List<Object?> get props => [underlyingPrice, payoff];
 }

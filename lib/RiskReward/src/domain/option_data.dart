@@ -1,4 +1,7 @@
-class OptionData {
+// ignore: depend_on_referenced_packages
+import 'package:equatable/equatable.dart';
+
+class OptionData extends Equatable {
   final double strikePrice;
   final String type;
   final double bid;
@@ -6,7 +9,7 @@ class OptionData {
   final String longShort;
   final DateTime expirationDate;
 
-  OptionData({
+  const OptionData({
     required this.strikePrice,
     required this.type,
     required this.bid,
@@ -14,4 +17,14 @@ class OptionData {
     required this.longShort,
     required this.expirationDate,
   });
+
+  @override
+  List<Object?> get props => [
+        strikePrice,
+        type,
+        bid,
+        ask,
+        longShort,
+        expirationDate,
+      ];
 }
