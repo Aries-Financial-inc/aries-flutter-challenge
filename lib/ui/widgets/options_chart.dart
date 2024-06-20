@@ -1,8 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class OptionsChart extends StatelessWidget {
-  const OptionsChart({
+/// [OptionsGraph] is the Risk-Reward graph
+/// takes [gradientColors] to visualize graph following the Application Theme Scheme
+/// [data] is the calculated options data to be represented as points in the graph
+class OptionsGraph extends StatelessWidget {
+  const OptionsGraph({
     super.key,
     required this.gradientColors,
     required this.data,

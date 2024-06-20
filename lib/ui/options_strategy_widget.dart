@@ -9,6 +9,13 @@ import '../states/options_strategy_state.dart';
 import '../events/options_strategy_event.dart';
 import '../models/option_contract.dart';
 
+///
+/// [OptionsStrategyWidget] widget is responsible for displaying the [OptionsGraph] widget, [max profit, max loss, break-even points] and [OptionsForm] to add new options
+/// takes list of [contract] as input
+/// on [OptionsStrategyInitial] state returns ['no data available']
+/// on [OptionsStrategyLoaded] state returns the options graph and [OptionsForm]
+/// else it displays an error
+///
 class OptionsStrategyWidget extends StatefulWidget {
   final List<OptionContractDTO> contracts;
   const OptionsStrategyWidget({super.key, required this.contracts});
@@ -19,7 +26,6 @@ class OptionsStrategyWidget extends StatefulWidget {
 
 class _OptionsStrategyWidgetState extends State<OptionsStrategyWidget> {
   late ScrollController _scrollController;
-  bool _isScrolled = false;
   final List<Color> gradientColors = [
     const Color(0xffe68823),
     const Color(0xffe68823),
@@ -29,22 +35,11 @@ class _OptionsStrategyWidgetState extends State<OptionsStrategyWidget> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    _scrollController.addListener(_listenToScrollChange);
+
     _updateContracts();
   }
 
-  void _listenToScrollChange() {
-    if (_scrollController.offset >= 100) {
-      setState(() {
-        _isScrolled = true;
-      });
-    } else {
-      setState(() {
-        _isScrolled = false;
-      });
-    }
-  }
-
+  // this function updates the state of the graph based on the demo data found in the challenge
   void _updateContracts() {
     context
         .read<OptionsStrategyBloc>()
@@ -81,7 +76,7 @@ class _OptionsStrategyWidgetState extends State<OptionsStrategyWidget> {
                         children: [
                           SizedBox(
                             height: MediaQuery.of(context).size.height * .40,
-                            child: OptionsChart(
+                            child: OptionsGraph(
                                 gradientColors: gradientColors,
                                 data: state.graphData),
                           ),

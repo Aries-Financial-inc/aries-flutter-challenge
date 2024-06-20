@@ -3,7 +3,7 @@ import 'dart:math';
 import '../models/option_contract.dart';
 
 class OptionCalculator {
-  /// Generates profit/loss graph data for the given list of option contracts.
+  /// Generates profit/loss graph data for the given list of options contracts.
   static List<FlSpot> calculateGraphPoints(List<OptionContract> options) {
     List<FlSpot> points = [];
     for (double price = 80; price <= 120; price += 0.5) {
@@ -100,7 +100,7 @@ class OptionCalculator {
     return breakEvenPoints.toList()..sort();
   }
 
-  /// parser function used to generate OptionContractDTO form the challenge json data .
+  /// parser function used to generate [OptionContractDTO] form the [challenge json data] .
   static List<OptionContractDTO> parseOptionContractsFromJson(
       List<Map<String, dynamic>> jsonList) {
     return jsonList.map((json) => OptionContractDTO.fromJson(json)).toList();

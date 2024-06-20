@@ -34,13 +34,6 @@ class _OptionsFormState extends State<OptionsForm> {
     super.dispose();
   }
 
-  // void _handleRadioValueChanged(OptionType? value) {
-  //   setState(() {
-  //     type = value!;
-  //     print(value == null ? "null" : value.toString());
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -99,19 +92,6 @@ class _OptionsFormState extends State<OptionsForm> {
               },
             ),
           ),
-          // DropdownButton<OptionType>(
-          //   style: const TextStyle(color: Colors.white),
-          //   value: type,
-          //   items: OptionType.values.map((OptionType type) {
-          //     return DropdownMenuItem<OptionType>(
-          //         value: type, child: Text(type.toString().split('.').last));
-          //   }).toList(),
-          //   onChanged: (OptionType? value) {
-          //     setState(() {
-          //       type = value!;
-          //     });
-          //   },
-          // ),
           const SizedBox(
             height: 22,
           ),
@@ -185,19 +165,6 @@ class _OptionsFormState extends State<OptionsForm> {
               },
             ),
           ),
-          // DropdownButton<LongShort>(
-          //   style: const TextStyle(color: Colors.white),
-          //   value: longShort,
-          //   items: LongShort.values.map((LongShort type) {
-          //     return DropdownMenuItem<LongShort>(
-          //         value: type, child: Text(type.toString().split('.').last));
-          //   }).toList(),
-          //   onChanged: (LongShort? value) {
-          //     setState(() {
-          //       longShort = value!;
-          //     });
-          //   },
-          // ),
           const SizedBox(
             height: 22,
           ),

@@ -5,6 +5,9 @@ import '../models/option_contract.dart';
 import '../repositories/options_strategy_repository.dart';
 import 'options_strategy_widget.dart';
 
+/// this class represents the options strategy entry point
+/// passes [OptionsStrategyBloc] and inject [OptionsStrategyRepository] into the widget tree
+/// takes [OptionContractDTO] list and provides it to the [OptionsStrategyWidget]
 class OptionsStrategyPage extends StatelessWidget {
   final List<OptionContractDTO> contracts;
   const OptionsStrategyPage({super.key, required this.contracts});

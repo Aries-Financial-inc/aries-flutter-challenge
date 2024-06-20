@@ -90,47 +90,14 @@ class OptionsCalculator extends StatefulWidget {
 
 class _OptionsCalculatorState extends State<OptionsCalculator> {
   List<Map<String, dynamic>> optionsData = [];
-  List<OptionContractDTO> contracts = [];
-  // final options = [
-  //   OptionContractDTO(
-  //     strikePrice: 100,
-  //     type: OptionType.call,
-  //     bid: 10.05,
-  //     ask: 12.04,
-  //     longShort: LongShort.long,
-  //     expirationDate: DateTime.parse("2025-12-17T00:00:00Z"),
-  //   ),
-  //   OptionContractDTO(
-  //     strikePrice: 102.50,
-  //     type: OptionType.call,
-  //     bid: 12.10,
-  //     ask: 14,
-  //     longShort: LongShort.long,
-  //     expirationDate: DateTime.parse("2025-12-17T00:00:00Z"),
-  //   ),
-  //   OptionContractDTO(
-  //     strikePrice: 103,
-  //     type: OptionType.put,
-  //     bid: 14,
-  //     ask: 15.50,
-  //     longShort: LongShort.short,
-  //     expirationDate: DateTime.parse("2025-12-17T00:00:00Z"),
-  //   ),
-  //   OptionContractDTO(
-  //     strikePrice: 105,
-  //     type: OptionType.put,
-  //     bid: 16,
-  //     ask: 18,
-  //     longShort: LongShort.long,
-  //     expirationDate: DateTime.parse("2025-12-17T00:00:00Z"),
-  //   ),
-  // ];
-  // Function to convert a JSON string to a list of OptionContractDTO.
 
+  /// [contracts] used to store parsed [optionsData] as [OptionContractDTO] list
+  List<OptionContractDTO> contracts = [];
   @override
   void initState() {
     super.initState();
     optionsData = widget.optionsData;
+
     contracts = OptionCalculator.parseOptionContractsFromJson(optionsData);
   }
 
