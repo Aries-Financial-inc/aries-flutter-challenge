@@ -1,28 +1,66 @@
+# Options Strategy Analyzer
 
+A Flutter app to analyze the risk and reward of options trading strategies. It supports up to four options contracts and visualizes their combined profit/loss on a graph.
 
-## Objective
+## Features
 
-Design and implement an iOS & Android front-end for options strategy risk and reward analysis using Flutter.
+- Input up to four options contracts (calls or puts).
+- Generate a risk and reward graph with the underlying asset's price on the X-axis and profit/loss on the Y-axis.
+- Display max profit, max loss, and break-even points.
 
-## Brief
+## Architecture
 
-Your challenge is to create a Flutter component that can generate a risk & reward graph for options strategies. The component should accept an input of up to four options contracts and output the following:
-1. A risk & reward graph where X is the price of the underlying at the time of expiry and Y is the profit/loss at that price. 
-2. Max profit, max loss, and all break even points.
+- **Flutter** for UI development.
+- **BloC (Business Logic Component)** for state management.
+- **SOLID principles** and **Design Patterns** for clean, maintainable, and scalable code.
 
-### Evaluation Criteria
+## Getting Started
 
-- Completeness of the logic
-- Usability of the graph
-- Aesthetics of the UI
-- Readability and code structure
+### Prerequisites
 
-### CodeSubmit 
+- [Flutter SDK](https://flutter.dev/docs/get-started/install) installed on your machine.
 
-Please organize, design, test, and document your code as if it were
-going into production - then push your changes to the main branch.
+### Installation
 
-Reply to the invitation e-mail with your github username to notify of completion.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/options_strategy_analyzer.git
 
-Have fun coding! 🚀
-The Aries Financial Team
+2. Navigate to the project directory:
+    ```bash
+        cd aries-flutter-challenge
+
+3. Install dependencies:
+    ```bash
+        flutter pub get
+
+4. Run App
+    ```bash
+        flutter run
+
+### Project Structure
+###### lib/blocs/: 
+Contains the BloC for managing state.
+###### lib/events/: 
+Defines the events for the BloC.
+###### lib/states/: 
+Defines the states for the BloC.
+###### lib/models/: 
+Contains the data models and DTOs.
+###### lib/repositories/: 
+Contains the repository for handling business logic and data processing.
+###### lib/ui/: 
+Contains the UI components.
+###### lib/main.dart: 
+Entry point of the application.
+### Usage
+Launch the app.
+Add options contracts through the provided UI.
+View the risk and reward graph along with key metrics (max profit, max loss, and break-even points).
+
+### Screens: 
+![Alt text](screens/photo_2024-06-20_12-18-50.jpg?raw=true "Title")
+![Alt text](screens/video_2024-06-20_12-18-18-ezgif.com-video-to-gif-converter.gif?raw=true "Title")
+[video_2024-06-20_12-18-18.mp4](..%2F..%2F..%2FDownloads%2FTelegram%20Desktop%2Fvideo_2024-06-20_12-18-18.mp4)
+[photo_2024-06-20_12-18-50.jpg](..%2F..%2F..%2FDownloads%2FTelegram%20Desktop%2Fphoto_2024-06-20_12-18-50.jpg)
+
