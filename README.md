@@ -52,9 +52,8 @@ Add options contracts through the provided UI.
 View the risk and reward graph along with key metrics (max profit, max loss, and break-even points).
 
 ### Screens: 
-<img src="screens/photo_2024-06-20_12-18-50.jpg?raw=true" width="120">
-![Alt text](screens/photo_2024-06-20_12-18-50.jpg?raw=true "Title")
+<img src="screens/photo_2024-06-20_12-18-50.jpg?raw=true" width="180">
 
-
-![Alt text](screens/video_2024-06-20_12-18-18-ezgif.com-video-to-gif-converter.gif?raw=true "Title")
+<br/>
+<img src="screens/video_2024-06-20_12-18-18-ezgif.com-video-to-gif-converter.gif?raw=true" width="180">
 
