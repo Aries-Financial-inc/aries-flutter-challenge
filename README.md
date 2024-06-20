@@ -27,22 +27,66 @@ Reply to the invitation e-mail with your github username to notify of completion
 Have fun coding! 🚀
 The Aries Financial Team
 
-### Answer
-1
+### Solution
+
+# Fiber App &nbsp;&nbsp;&nbsp;<img src="./assets/images/android-logo.png" width=20>
+
+This is the source code for the [Fiber](https://fiber.ng) mobile app (ios, android, windows and web) built using flutter programming language.
+
+Fiber is a FREE inventory management app used to track inventory, record sales, and print receipts. Fiber is simple, reliable, and works across mobiles, desktops, and even offline.
+
+## Requirements
+
+- Flutter version 3.22.2
+- Dart 3.4.3
+- DevTools 2.34.3
+- Flutter sdk environment: '>=3.3.0 <4.0.0'
+
+## Getting Started
+
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
+
+Run `flutter pub get;` to download dependencies.
+
+Build the application by running `flutter run;`
+or from the run and debug sidebar, click run icon.
+
+## Testing
+
+### Unit tests
+
+```bash
+flutter run test/unit_test.dart;
+```
+
+### Integration tests
+
+```bash
+flutter run test/widget_test.dart;
+```
+
+NB: There was no need to used state management (e.g BLoC), dependency injection etc for this solution.
+
+#### 1
+
 Entry cost: $1,105.00
 Maximum risk: $1,105.00 (at $100.00)
 Maximum return: infinite (on upside)
 Max return on risk: N/A
 Breakevens at expiry: $111.05
 
-2
+#### 2
+
 Entry cost: $1,305.00
 Maximum risk: $1,305.00 (at $102.50)
 Maximum return: infinite (on upside)
 Max return on risk: N/A
 Breakevens at expiry: $115.55
 
-3
+#### 3
+
 Entry credit: $1,475.00 net credit
 Maximum risk: $8,825.00 (at $0.00)
 Maximum return: $1,475.00 (at $103.00)
@@ -50,13 +94,14 @@ Max return on risk: 16.7% (2034% ann.)
 Breakevens at expiry: $88.25
 Probability of profit: 100% 
 
-4
+#### 4
+
 Entry cost: $1,700.00
 Maximum risk: $1,700.00 (at $105.00)
 Maximum return: $8,800.00 (at $0.00)
 Max return on risk: 517.6% (62980% ann.)
 Breakevens at expiry: $88.00
 
-Screenshot:
+### Screenshot:
 
 <img src="/assets/screenshots/1.png" width=270>
