@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_challenge/profit_chart.dart';
 
 void main() {
   runApp(const MyApp());
@@ -80,7 +81,12 @@ class _OptionsCalculatorState extends State<OptionsCalculator> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Options Profit Calculator"),
       ),
-      body: const Text("Your code here")
+      body: SingleChildScrollView(
+        child: Column(
+          children: optionsData.map(
+            (option) => OptionProfitChart(option: option)).toList()
+          ),
+        )
     );
   }
 }
