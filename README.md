@@ -39,20 +39,13 @@ A Flutter app to analyze the risk and reward of options trading strategies. It s
         flutter run
 
 ### Project Structure
-###### lib/blocs/: 
-Contains the BloC for managing state.
-###### lib/events/: 
-Defines the events for the BloC.
-###### lib/states/: 
-Defines the states for the BloC.
-###### lib/models/: 
-Contains the data models and DTOs.
-###### lib/repositories/: 
-Contains the repository for handling business logic and data processing.
-###### lib/ui/: 
-Contains the UI components.
-###### lib/main.dart: 
-Entry point of the application.
+###### lib/blocs/: Contains the BloC for managing state.
+###### lib/events/: Defines the events for the BloC.
+###### lib/states/: Defines the states for the BloC.
+###### lib/models/: Contains the data models and DTOs.
+###### lib/repositories/: Contains the repository for handling business logic and data processing.
+###### lib/ui/: Contains the UI components.
+###### lib/main.dart: Entry point of the application.
 ### Usage
 Launch the app.
 Add options contracts through the provided UI.
@@ -60,5 +53,7 @@ View the risk and reward graph along with key metrics (max profit, max loss, and
 
 ### Screens: 
 ![Alt text](screens/photo_2024-06-20_12-18-50.jpg?raw=true "Title")
+
+
 ![Alt text](screens/video_2024-06-20_12-18-18-ezgif.com-video-to-gif-converter.gif?raw=true "Title")
 
