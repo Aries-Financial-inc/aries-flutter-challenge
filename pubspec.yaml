@@ -31,14 +31,30 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # State management
+  flutter_bloc: ^8.1.1
+
+  # For equality and immutability support
+  equatable: ^2.0.5
+
+  # Charting library for displaying the profit/loss graph
+  fl_chart: ^0.68.0
+
+  # Utilities for easy date manipulation
+  intl: ^0.19.0
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
 
+  bloc: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  bloc_test: ^9.0.3
+  mockito: ^5.1.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
