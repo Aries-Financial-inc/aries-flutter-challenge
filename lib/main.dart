@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_challenge/constraints/colors.dart';
 import 'package:flutter_challenge/ui/options_strategy_page.dart';
 import 'package:flutter_challenge/utils/option_calculator.dart';
-// import 'package:flutter_challenge/test.dart';
-// import 'package:flutter_challenge/ui/options_strategy_widget.dart';
 
 import 'models/option_contract.dart';
 
@@ -19,27 +18,9 @@ class MyApp extends StatelessWidget {
       title: 'Options Profit Calculator',
       theme: ThemeData(
         useMaterial3: true,
-        // primarySwatch: Colors.deepOrange,
-        primaryColor: const Color(0xffe68823),
-
-        inputDecorationTheme: InputDecorationTheme(
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: Color(0xffe68823)),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              // borderSide: const BorderSide(color: Color(0xffe68823)),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: Color(0xffe68823)),
-            ),
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-            focusColor: const Color(0xffe68823),
-            hintStyle: const TextStyle(color: Colors.white)),
-        // appBarTheme: AppBarTheme(backgroundColor: Colors.deepPurple)
+        primarySwatch: Colors.deepPurple,
+        primaryColor: AppColors.egoPrimaryColor,
+        inputDecorationTheme: AppColors.egoInputDecorationTheme,
       ),
       home: const OptionsCalculator(optionsData: [
         {

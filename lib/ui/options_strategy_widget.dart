@@ -1,3 +1,4 @@
+import 'package:flutter_challenge/constraints/colors.dart';
 import 'package:flutter_challenge/ui/widgets/options_chart.dart';
 
 import '../extensions/double_ex.dart';
@@ -25,16 +26,14 @@ class OptionsStrategyWidget extends StatefulWidget {
 }
 
 class _OptionsStrategyWidgetState extends State<OptionsStrategyWidget> {
-  late ScrollController _scrollController;
   final List<Color> gradientColors = [
-    const Color(0xffe68823),
-    const Color(0xffe68823),
+    AppColors.egoPrimaryColor,
+    AppColors.egoPrimaryColor,
   ];
 
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
 
     _updateContracts();
   }
@@ -50,7 +49,7 @@ class _OptionsStrategyWidgetState extends State<OptionsStrategyWidget> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: const Color(0xff0E1117),
+      backgroundColor: AppColors.egoBackgroundColor,
       body: BlocBuilder<OptionsStrategyBloc, OptionsStrategyState>(
         builder: (context, state) {
           if (state is OptionsStrategyInitial) {
@@ -65,7 +64,7 @@ class _OptionsStrategyWidgetState extends State<OptionsStrategyWidget> {
                     pinned: true,
                     stretch: true,
                     toolbarHeight: 80,
-                    backgroundColor: const Color(0xff161b22),
+                    backgroundColor: AppColors.egoAccentColor,
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(40),
@@ -150,7 +149,7 @@ class _OptionsStrategyWidgetState extends State<OptionsStrategyWidget> {
                                           style: const TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
-                                            color: Color(0xffe68823),
+                                            color: AppColors.egoPrimaryColor,
                                           ),
                                         ),
                                       ],

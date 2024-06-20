@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:flutter_challenge/constraints/colors.dart';
 import '../../blocs/options_strategy_bloc.dart';
 import '../../events/options_strategy_event.dart';
 import '../../models/option_contract.dart';
-// import '../blocs/options_bloc.dart';
+import 'ego_text_field.dart';
 
 class OptionsForm extends StatefulWidget {
   const OptionsForm({super.key});
@@ -40,20 +40,10 @@ class _OptionsFormState extends State<OptionsForm> {
       key: _formKey,
       child: Column(
         children: [
-          TextFormField(
-            style: const TextStyle(color: Colors.white),
+          EgoTextForm(
             controller: _strikePriceController,
-            decoration: const InputDecoration(
-              labelText: 'Strike Price',
-              labelStyle: TextStyle(color: Colors.white),
-            ),
+            label: 'Strike Price',
             keyboardType: TextInputType.number,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter a strike price';
-              }
-              return null;
-            },
           ),
           const SizedBox(
             height: 22,
@@ -64,7 +54,7 @@ class _OptionsFormState extends State<OptionsForm> {
               style: TextStyle(color: Colors.white),
             ),
             leading: Radio<OptionType>(
-              activeColor: const Color(0xffe68823),
+              activeColor: AppColors.egoPrimaryColor,
               toggleable: true,
               value: OptionType.call,
               groupValue: type,
@@ -81,7 +71,7 @@ class _OptionsFormState extends State<OptionsForm> {
               style: TextStyle(color: Colors.white),
             ),
             leading: Radio<OptionType>(
-              activeColor: const Color(0xffe68823),
+              activeColor: AppColors.egoPrimaryColor,
               toggleable: true,
               value: OptionType.put,
               groupValue: type,
@@ -137,7 +127,7 @@ class _OptionsFormState extends State<OptionsForm> {
               style: TextStyle(color: Colors.white),
             ),
             leading: Radio<LongShort>(
-              activeColor: const Color(0xffe68823),
+              activeColor: AppColors.egoPrimaryColor,
               toggleable: true,
               value: LongShort.long,
               groupValue: longShort,
@@ -154,7 +144,7 @@ class _OptionsFormState extends State<OptionsForm> {
               style: TextStyle(color: Colors.white),
             ),
             leading: Radio<LongShort>(
-              activeColor: const Color(0xffe68823),
+              activeColor: AppColors.egoPrimaryColor,
               toggleable: true,
               value: LongShort.short,
               groupValue: longShort,
@@ -189,7 +179,7 @@ class _OptionsFormState extends State<OptionsForm> {
           FloatingActionButton.extended(
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(8))),
-            backgroundColor: const Color(0xff161b22),
+            backgroundColor: AppColors.egoPrimaryColor,
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 final newOption = OptionContractDTO(
@@ -197,9 +187,7 @@ class _OptionsFormState extends State<OptionsForm> {
                   type: type!,
                   bid: double.parse(_bidController.text),
                   ask: double.parse(_askController.text),
-                  longShort: _longShortController.text.toLowerCase() == 'long'
-                      ? LongShort.long
-                      : LongShort.short,
+                  longShort: longShort,
                   expirationDate:
                       DateTime.parse(_expirationDateController.text),
                 );

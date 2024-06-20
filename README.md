@@ -61,6 +61,4 @@ View the risk and reward graph along with key metrics (max profit, max loss, and
 ### Screens: 
 ![Alt text](screens/photo_2024-06-20_12-18-50.jpg?raw=true "Title")
 ![Alt text](screens/video_2024-06-20_12-18-18-ezgif.com-video-to-gif-converter.gif?raw=true "Title")
-[video_2024-06-20_12-18-18.mp4](..%2F..%2F..%2FDownloads%2FTelegram%20Desktop%2Fvideo_2024-06-20_12-18-18.mp4)
-[photo_2024-06-20_12-18-50.jpg](..%2F..%2F..%2FDownloads%2FTelegram%20Desktop%2Fphoto_2024-06-20_12-18-50.jpg)
 
