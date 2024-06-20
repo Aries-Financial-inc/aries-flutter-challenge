@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_challenge/RiskReward/flutter_risk_reward_chart.dart';
+import 'package:flutter_risk_reward_chart/flutter_risk_reward_chart.dart';
 
 void main() {
   runApp(const MyApp());
@@ -84,12 +84,31 @@ class _OptionsCalculatorState extends State<OptionsCalculator> {
       body: SafeArea(
           child: RiskRewardChart(
         optionsData: optionsData.map((el) {
+          OptionType type;
+          if (el["type"] == "Call") {
+            if (el["long_short"] == "long") {
+              type = OptionType.callLong;
+            } else if (el["long_short"] == "short") {
+              type = OptionType.callShort;
+            } else {
+              throw Exception("Invalid longShort type");
+            }
+          } else if (el["type"] == "Put") {
+            if (el["long_short"] == "long") {
+              type = OptionType.putLong;
+            } else if (el["long_short"] == "short") {
+              type = OptionType.putShort;
+            } else {
+              throw Exception("Invalid longShort type");
+            }
+          } else {
+            throw Exception("Invalid option type");
+          }
           return OptionData(
               strikePrice: double.parse(el["strike_price"].toString()),
-              type: el["type"],
+              type: type,
               bid: double.parse(el["bid"].toString()),
               ask: double.parse(el["ask"].toString()),
-              longShort: el["long_short"],
               expirationDate: DateTime.parse(el["expiration_date"]));
         }).toList(),
       )),
