@@ -1,7 +1,21 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_challenge/screens/splash_screen/splash_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'package:provider/provider.dart';
+// import 'package:flutter_localizations/flutter_localizations.dart';
+import 'linker.dart';
+
+// My code will be brief
+
+// BaseLanguage lan = LanguageEn();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initialize();
+  
+  await appini();
+  runApp(MultiProvider(providers: [
+    // for handling the option activity
+    ChangeNotifierProvider(create: (_) => OptionsProvider()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -10,77 +24,41 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Options Profit Calculator',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      navigatorKey: navigatorKey,
+      title: appName,
+      debugShowCheckedModeBanner: false,
+      // theme: ThemeData(
+      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      //   useMaterial3: true,
+      // ),
+      theme: ThemeData.dark(
         useMaterial3: true,
+      ).copyWith(
+        scaffoldBackgroundColor: appScaffoldColor,
+        primaryColor: appScaffoldColor,
+        colorScheme: ColorScheme.dark(
+          primary: appButtonBackgroundColorGlobal,
+          secondary: appButtonBackgroundColorGlobal,
+        ),
       ),
-      home: const OptionsCalculator(optionsData: [
-        {
-          "strike_price": 100, 
-          "type": "Call", 
-          "bid": 10.05, 
-          "ask": 12.04, 
-          "long_short": "long", 
-          "expiration_date": "2025-12-17T00:00:00Z"
-        },
-        {
-          "strike_price": 102.50, 
-          "type": "Call", 
-          "bid": 12.10, 
-          "ask": 14, 
-          "long_short": "long", 
-          "expiration_date": "2025-12-17T00:00:00Z"
-        },
-        {
-          "strike_price": 103, 
-          "type": "Put", 
-          "bid": 14, 
-          "ask": 15.50, 
-          "long_short": "short", 
-          "expiration_date": "2025-12-17T00:00:00Z"
-        },
-        {
-          "strike_price": 105, 
-          "type": "Put", 
-          "bid": 16, 
-          "ask": 18, 
-          "long_short": "long", 
-          "expiration_date": "2025-12-17T00:00:00Z"
-        }
-      ]),
+      //  localizationsDelegates: const [
+      //     AppLocalizations(),
+      //     GlobalMaterialLocalizations.delegate,
+      //     GlobalWidgetsLocalizations.delegate,
+      //     GlobalCupertinoLocalizations.delegate,
+      //   ],
+      // localeResolutionCallback: (locale, supportedLocales) => locale,
+      // locale: Locale(localizationProvider.selectedLanguageCode),
+      // supportedLocales: LanguageDataModel.languageLocales(),
+      home: const SplashScreen(),
     );
   }
 }
 
-class OptionsCalculator extends StatefulWidget {
-  const OptionsCalculator({super.key, required this.optionsData});
+appini() {
+  // defaultAppButtonRadius = 15;
+  appButtonBackgroundColorGlobal = const Color(0xFF6F4BFD);
 
-  final List<Map<String, dynamic>> optionsData;
-
-  @override
-  State<OptionsCalculator> createState() => _OptionsCalculatorState();
-}
-
-class _OptionsCalculatorState extends State<OptionsCalculator> {
-  List<Map<String, dynamic>> optionsData = [];
-
-  @override
-  void initState() {
-    super.initState();
-    optionsData = widget.optionsData;
-  }
-
-  // Your code here
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Options Profit Calculator"),
-      ),
-      body: const Text("Your code here")
-    );
-  }
+  // defaultAppButtonTextColorGlobal = Colors.white;
+  // textSecondaryColorGlobal = secondaryblackColor;
 }
