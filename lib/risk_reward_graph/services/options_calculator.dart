@@ -4,33 +4,6 @@ import 'package:flutter_challenge/risk_reward_graph/model/option_contract.dart';
 
 ///Business level implementation of option calc
 class OptionsCalculatorService {
-  /// Calculates the profit or loss for a given option contract
-  /// based on the underlying price.
-  static double calculateOptionProfitLoss(
-      OptionContractModel option, double underlyingPrice) {
-    final strikePrice = option.strikePrice;
-    final isLong = option.isLong;
-    final priceDifference = underlyingPrice - strikePrice;
-
-    // Determine intrinsic value
-    double intrinsicValue = 0;
-    if (option.isCall) {
-      intrinsicValue = max(priceDifference, 0);
-    } else {
-      intrinsicValue = max(strikePrice - underlyingPrice, 0);
-    }
-
-    // Calculate cost of the option
-    final cost = (option.bid + option.ask) / 2;
-
-    // Compute profit or loss based on whether the position is long or short
-    if (isLong) {
-      return intrinsicValue - cost;
-    } else {
-      return cost - intrinsicValue;
-    }
-  }
-
   /// Calculates the overall profit or loss for a list of option contracts
   /// across a range of underlying prices, and finds all break-even points.
   static OptionsAnalysisResult calculateProfitLoss(
@@ -52,7 +25,7 @@ class OptionsCalculatorService {
 
       // Sum the profit or loss for each option at this underlying price
       for (OptionContractModel option in optionsData) {
-        totalProfitLoss += calculateOptionProfitLoss(option, price);
+        totalProfitLoss += _calculateOptionProfitLoss(option, price);
       }
       profitLoss.add(totalProfitLoss);
 
@@ -87,6 +60,34 @@ class OptionsCalculatorService {
         breakEvenPoints: breakEvenPoints);
   }
 
+  /// Calculates the profit or loss for a given option contract
+  /// based on the underlying price.
+  static double _calculateOptionProfitLoss(
+      OptionContractModel option, double underlyingPrice) {
+    final strikePrice = option.strikePrice;
+    final isLong = option.isLong;
+    final priceDifference = underlyingPrice - strikePrice;
+
+    // Determine intrinsic value
+    double intrinsicValue = 0;
+    if (option.isCall) {
+      intrinsicValue = max(priceDifference, 0);
+    } else {
+      intrinsicValue = max(strikePrice - underlyingPrice, 0);
+    }
+
+    // Calculate cost of the option
+    final cost = (option.bid + option.ask) / 2;
+
+    // Compute profit or loss based on whether the position is long or short
+    if (isLong) {
+      return intrinsicValue - cost;
+    } else {
+      return cost - intrinsicValue;
+    }
+  }
+
+  ///computes the range of a graph to draw
   static List<double> _computeRange(List<OptionContractModel> optionsData) {
     if (optionsData.isEmpty) {
       return List<double>.generate(50, (index) => 80.0 + index);

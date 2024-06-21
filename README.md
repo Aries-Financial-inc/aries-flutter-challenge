@@ -1,28 +1,33 @@
 
-
-## Objective
-
-Design and implement an iOS & Android front-end for options strategy risk and reward analysis using Flutter.
-
 ## Brief
 
 Your challenge is to create a Flutter component that can generate a risk & reward graph for options strategies. The component should accept an input of up to four options contracts and output the following:
 1. A risk & reward graph where X is the price of the underlying at the time of expiry and Y is the profit/loss at that price. 
 2. Max profit, max loss, and all break even points.
 
-### Evaluation Criteria
+### Screenshot:
+<img src="screen_shots/home.png?raw=true" width="300">
 
-- Completeness of the logic
-- Usability of the graph
-- Aesthetics of the UI
-- Readability and code structure
+### App Profiling Result
+No Jank found, App can run smoothly at 60-FPS
 
-### CodeSubmit 
 
-Please organize, design, test, and document your code as if it were
-going into production - then push your changes to the main branch.
+### Architecture
+#### Clean architecture along with SOLID principles has been utilised
 
-Reply to the invitation e-mail with your github username to notify of completion.
+###     View
+        Strictly only UI elements (No state or logic here)
 
-Have fun coding! 🚀
-The Aries Financial Team
+###     Controller
+        Handles the UI state and logic
+
+###     Repository
+        controls the data flow
+
+###     Model
+        data classes
+
+###     Service
+        fetches data from various sources 
+
+#### State management used: GET-X

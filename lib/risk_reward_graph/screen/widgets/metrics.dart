@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_challenge/constants/strings.dart';
 
 class Metrics extends StatelessWidget {
   final String maxProfit;
@@ -16,17 +17,19 @@ class Metrics extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Profit & Loss Metrics",
+          StringValues.metricsTitle,
           style: Theme.of(context)
               .textTheme
               .titleLarge
               ?.copyWith(fontWeight: FontWeight.w800),
         ),
         const SizedBox(height: 10),
-        _MetricTile("Max Profit", maxProfit, Icons.arrow_upward, Colors.green),
-        _MetricTile("Max Loss", maxLoss, Icons.arrow_downward, Colors.red),
         _MetricTile(
-          "Break Even Points",
+            StringValues.maxLoss, maxProfit, Icons.arrow_upward, Colors.green),
+        _MetricTile(
+            StringValues.maxLoss, maxLoss, Icons.arrow_downward, Colors.red),
+        _MetricTile(
+          StringValues.breakEvenPoints,
           breakEvenPoints,
           Icons.breakfast_dining,
           Colors.orange,
@@ -55,14 +58,8 @@ class _MetricTile extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 4.0),
       child: ListTile(
         leading: Icon(icon, color: iconColor),
-        title: Text(
-          title,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text(
-          value,
-          style: const TextStyle(fontSize: 16),
-        ),
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+        subtitle: Text(value, style: const TextStyle(fontSize: 16)),
       ),
     );
   }

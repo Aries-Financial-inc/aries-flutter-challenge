@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_challenge/constants/colors.dart';
+import 'package:flutter_challenge/constants/theme.dart';
 import 'package:flutter_challenge/risk_reward_graph/model/option_contract.dart';
 import 'package:flutter_challenge/risk_reward_graph/screen/options_calculator_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,7 +8,24 @@ import 'package:google_fonts/google_fonts.dart';
 void main() {
   runApp(const MyApp());
 }
-final optionList = [
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Options Profit Calculator',
+      theme: appTheme,
+      home: OptionsCalculatorScreen(
+        optionsData:
+            optionList.map((e) => OptionContractModel.fromJson(e)).toList(),
+      ),
+    );
+  }
+}
+
+final List<Map<String, Object>> optionList = [
   {
     "strike_price": 100,
     "type": "Call",
@@ -41,27 +59,3 @@ final optionList = [
     "expiration_date": "2025-12-17T00:00:00Z"
   }
 ];
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Options Profit Calculator',
-      theme: ThemeData(
-          brightness: Brightness.dark,
-          primaryColor: AppColors.primary,
-          colorScheme: const ColorScheme.dark(
-              background: Colors.black,
-              primary: AppColors.primary,
-              secondary: AppColors.white),
-          textTheme: GoogleFonts.publicSansTextTheme().apply(
-              bodyColor: AppColors.white, displayColor: AppColors.white)),
-      home:   OptionsCalculatorScreen(
-        optionsData: optionList.map((e) => OptionContractModel.fromJson(e)).toList(),
-      ),
-    );
-  }
-}
