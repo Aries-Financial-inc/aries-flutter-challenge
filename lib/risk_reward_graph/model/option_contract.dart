@@ -1,29 +1,33 @@
-class OptionContract {
+enum OptionType { call, put }
+
+enum OptionPosition { long, short }
+
+class OptionContractModel {
   final double strikePrice;
-  final String type; // "Call" or "Put"
+  final OptionType type; // "Call" or "Put"
   final double bid;
   final double ask;
-  final String longShort; // "long" or "short"
-  final DateTime expirationDate;
+  final OptionPosition position; // "long" or "short"
+  final String expirationDate;
 
-  OptionContract({
+  OptionContractModel({
     required this.strikePrice,
     required this.type,
     required this.bid,
     required this.ask,
-    required this.longShort,
+    required this.position,
     required this.expirationDate,
   });
 
   // Factory method to create an OptionContract from a Map
-  factory OptionContract.fromJson(Map<String, dynamic> json) {
-    return OptionContract(
+  factory OptionContractModel.fromJson(Map<String, dynamic> json) {
+    return OptionContractModel(
       strikePrice: json['strike_price'].toDouble(),
-      type: json['type'] as String,
+      type: _parseOptionType(json['type']),
       bid: json['bid'].toDouble(),
       ask: json['ask'].toDouble(),
-      longShort: json['long_short'] as String,
-      expirationDate: DateTime.parse(json['expiration_date'] as String),
+      position: _parseOptionPosition(json['long_short']),
+      expirationDate: json['expiration_date'],
     );
   }
 
@@ -34,8 +38,31 @@ class OptionContract {
       'type': type,
       'bid': bid,
       'ask': ask,
-      'long_short': longShort,
-      'expiration_date': expirationDate.toIso8601String(),
+      'long_short': position,
+      'expiration_date': expirationDate,
     };
+  }
+
+  bool get isLong => position == OptionPosition.long;
+  bool get isCall => type == OptionType.call;
+
+  static OptionType _parseOptionType(String optionTypeString) {
+    if (optionTypeString.toLowerCase() == 'call') {
+      return OptionType.call;
+    } else if (optionTypeString.toLowerCase() == 'put') {
+      return OptionType.put;
+    } else {
+      throw ArgumentError('Invalid option type string: $optionTypeString');
+    }
+  }
+
+  static OptionPosition _parseOptionPosition(String pos) {
+    if (pos.toLowerCase() == 'long') {
+      return OptionPosition.long;
+    } else if (pos.toLowerCase() == 'short') {
+      return OptionPosition.short;
+    } else {
+      throw ArgumentError('Invalid option type string: $pos');
+    }
   }
 }

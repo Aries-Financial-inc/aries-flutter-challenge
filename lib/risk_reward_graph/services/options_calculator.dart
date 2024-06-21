@@ -3,16 +3,16 @@ import 'package:flutter_challenge/risk_reward_graph/model/option_contract.dart';
 
 class OptionsCalculatorService {
   static double calculateOptionProfitLoss(
-      OptionContract option, double underlyingPrice) {
+      OptionContractModel option, double underlyingPrice) {
     final strikePrice = option.strikePrice;
-    final type = option.type;
-    final isLong = option.longShort == 'long';
+
+    final isLong = option.isLong;
     final priceDifference = underlyingPrice - strikePrice;
 
     double intrinsicValue = 0;
-    if (type == 'Call') {
+    if (option.isCall) {
       intrinsicValue = max(priceDifference, 0);
-    } else if (type == 'Put') {
+    } else {
       intrinsicValue = max(strikePrice - underlyingPrice, 0);
     }
 
@@ -26,7 +26,7 @@ class OptionsCalculatorService {
   }
 
   static Map<String, dynamic> calculateProfitLoss(
-      List<OptionContract> optionsData) {
+      List<OptionContractModel> optionsData) {
     final underlyingPrices = List.generate(50, (index) => 80.0 + index);
     List<double> profitLoss = [];
     double maxProfit = double.negativeInfinity;
@@ -46,6 +46,7 @@ class OptionsCalculatorService {
           totalProfitLoss.sign != profitLoss[profitLoss.length - 2].sign) {
         breakEvenPoints.add(price);
       }
+
     }
 
     return {
