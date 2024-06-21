@@ -24,7 +24,7 @@ This project implements an iOS & Android front-end application for options strat
 
 ## Demo Video
 
-You can watch a detailed demo of the application [here](assets/recored.mp4).
+You can watch a detailed demo of the application [here](assets/record.mp4).
 
 ## Installation
 
