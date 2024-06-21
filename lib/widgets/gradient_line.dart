@@ -23,7 +23,7 @@ class GradientLinePainter extends CustomPainter {
     Paint paint = Paint()
       ..strokeWidth = 2
       ..shader = const LinearGradient(
-        colors: [Colors.blue, Colors.white],
+        colors: [Colors.yellowAccent, Colors.white],
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
       ).createShader(Rect.fromLTWH(0, 0, size.width, size.height));
@@ -37,7 +37,7 @@ class GradientLinePainter extends CustomPainter {
 
     // Draw the circle at the top
     paint.shader = null;
-    paint.color = Colors.blue;
+    paint.color = Colors.yellowAccent;
     canvas.drawCircle(Offset(size.width / 2, 60), 6, paint);
 
     // Draw the message box

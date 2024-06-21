@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_challenge/widgets/message_box.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../data_models/data_models.dart';
@@ -53,6 +54,24 @@ class OptionPayoffChart extends StatelessWidget {
         ),
       ],
       annotations: <CartesianChartAnnotation>[
+        if (maxProfit != null)
+          CartesianChartAnnotation(
+            widget: MessageBox(
+              message: 'Max Profit: \$${maxProfit?.toStringAsFixed(2)}',
+            ),
+            coordinateUnit: CoordinateUnit.point,
+            x: 90,
+            y: maxProfit,
+          ),
+        if (maxLoss != null)
+          CartesianChartAnnotation(
+            widget: MessageBox(
+              message: 'Max Loss: \$${maxLoss?.toStringAsFixed(2)}',
+            ),
+            coordinateUnit: CoordinateUnit.point,
+            x: 90,
+            y: maxLoss,
+          ),
         if (showBreakEvenPoints)
           ...breakEvenPoints.map(
             (point) => CartesianChartAnnotation(
