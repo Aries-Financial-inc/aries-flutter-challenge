@@ -1,0 +1,4 @@
+enum optionTypes {
+  call,
+  put,
+}
