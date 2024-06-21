@@ -31,7 +31,7 @@ class OptionsCalculatorScreen extends StatelessWidget {
               init: OptionsCalculatorScreenController(optionsData),
               builder: (controller) => Column(
                 children: [
-                  Graph(plots: controller.profitLossData),
+                  Graph(plots: controller.result.profitLossData),
                   const SizedBox(height: 32),
                   Metrics(
                       maxProfit: controller.maxProfitStr,

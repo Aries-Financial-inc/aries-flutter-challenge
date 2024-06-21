@@ -1,6 +1,8 @@
 import 'dart:math';
+import 'package:flutter_challenge/risk_reward_graph/model/option_analysis_result.dart';
 import 'package:flutter_challenge/risk_reward_graph/model/option_contract.dart';
 
+///Business level implementation of option calc
 class OptionsCalculatorService {
   /// Calculates the profit or loss for a given option contract
   /// based on the underlying price.
@@ -31,14 +33,11 @@ class OptionsCalculatorService {
 
   /// Calculates the overall profit or loss for a list of option contracts
   /// across a range of underlying prices, and finds all break-even points.
-  static Map<String, dynamic> calculateProfitLoss(
+  static OptionsAnalysisResult calculateProfitLoss(
       List<OptionContractModel> optionsData) {
     // Define the range of underlying prices to evaluate
 
-    final List<double> underlyingPrices = List<double>.generate(
-      50,
-          (index) => 80.0 + index,
-    );
+    final List<double> underlyingPrices = _computeRange(optionsData);
 
     List<double> profitLoss = [];
     double maxProfit = double.negativeInfinity;
@@ -68,7 +67,7 @@ class OptionsCalculatorService {
       // Identify break-even points for each individual option contract
       for (var option in optionsData) {
         List<double> individualBreakEvenPoints =
-        _calculateIndividualBreakEvenPoints(option);
+            _calculateIndividualBreakEvenPoints(option);
         breakEvenPointsSet.addAll(individualBreakEvenPoints);
       }
     }
@@ -81,15 +80,29 @@ class OptionsCalculatorService {
     for (int i = 0; i < underlyingPrices.length; i++) {
       profitLossData.add(MapEntry(underlyingPrices[i], profitLoss[i]));
     }
-
-    return {
-      'profitLossData': profitLossData,
-      'maxProfit': maxProfit,
-      'maxLoss': maxLoss,
-      'breakEvenPoints': breakEvenPoints,
-    };
+    return OptionsAnalysisResult(
+        profitLossData: profitLossData,
+        maxProfit: maxProfit,
+        maxLoss: maxLoss,
+        breakEvenPoints: breakEvenPoints);
   }
 
+  static List<double> _computeRange(List<OptionContractModel> optionsData) {
+    if (optionsData.isEmpty) {
+      return List<double>.generate(50, (index) => 80.0 + index);
+    }
+    final price = optionsData.first.strikePrice;
+    const double spread = 20;
+    double start = price - (spread / 2).floor();
+    double end = price + spread;
+    // Generate the list of numbers
+    List<double> result = [];
+    for (double i = start; i <= end; i++) {
+      result.add(i);
+    }
+
+    return result;
+  }
 
   /// Calculates the break-even points for a single option contract.
   static List<double> _calculateIndividualBreakEvenPoints(
