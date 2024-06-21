@@ -1,0 +1,29 @@
+                      SplashScreen
+                          |
+                   Is User Logged In?
+                          |
+       +------------------+------------------+
+       |                                      |
+      Yes                                     No
+       |                                      |  
+       |                                OnboardingScreen
+       |                                      |
+       |                                 RegistrationScreen
+       \                                       |
+        \                              LoginScreen / ForgotPasswordScreen
+         \                                     |
+          \                              
+            \                                  |             
+             \   
+              \                                 |
+              \                                 |
+               ----------HomeScreen---------                         
+                             |                                      
+                       DashboardScreen                     
+                             |                                     
+                    OptionsStrategyScreen                
+                             |                                  
+                    CalculatorInputScreen             
+                             |                                    
+                       ResultsScreen                     
+                                            
