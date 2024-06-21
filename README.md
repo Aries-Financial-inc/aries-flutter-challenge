@@ -1,6 +1,8 @@
-LinkedIn: Mabs Ademola
-Gmail: mabsademola@gmail.com
-Github: https://github.com/mabsademola/
+- LinkedIn: Mabs Ademola
+
+- Gmail: mabsademola@gmail.com
+
+- Github: https://github.com/mabsademola/
 
 
 # Options Strategy Risk & Reward Analysis
@@ -17,14 +19,13 @@ This project implements an iOS & Android front-end application for options strat
 ## Screenshots
 
 [Screenshot 1](assets/images/1%20(2).jpg)
-
-[Screenshot 2](assets/images/1%20(3).jpg)
-
-[Screenshot 3](assets/images/1%20(1).jpg)
+[Screenshot 2](assets/images/1%20(1).jpg)
+[Screenshot 3](assets/images/1%20(4).jpg)
+[Screenshot 4](assets/images/1%20(3).jpg)
 
 ## Demo Video
 
-You can watch a detailed demo of the application [here](assets/record.mp4).
+You can watch a detailed demo of the application [here](assets/record.mp4)
 
 ## Installation
 
@@ -92,6 +93,8 @@ This code was written by mabs ademola a full stack developer (fluter + django).
 
 For any queries or feedback, please reach out to me at [mabsademola@gmail.com].
 
-LinkedIn: Mabs Ademola
-Gmail: mabsademola@gmail.com
-Github: https://github.com/mabsademola/
+- LinkedIn: Mabs Ademola
+
+- Gmail: mabsademola@gmail.com
+
+- Github: https://github.com/mabsademola/
