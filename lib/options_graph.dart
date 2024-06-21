@@ -20,7 +20,7 @@ class OptionsGraph extends StatefulHookConsumerWidget {
 class _OptionsGraphState extends ConsumerState<OptionsGraph> {
   @override
   void initState() {
-    // mapData();
+    mapData();
     super.initState();
   }
 
@@ -227,21 +227,19 @@ final spots = StateProvider<List<FlSpot>>((ref) => []);
 _getSpots(WidgetRef ref) {
   /// lets assume x is between 95 to 110 with the interval of 1 to fit in the screen;
   if (ref.watch(optionsContractProvider).isNotEmpty) {
-    ref.watch(optionsContractProvider).forEach((e) {
-      log("$e");
-      for (double x = 95; x <= 110; x += 1) {
-        FlSpot spotData = FlSpot(
-          x,
-          ref.read(optionsContractProvider.notifier).calculateProfitLoss(
-                type: e.type,
-                x: x,
-                strikePrice: e.strikePrice,
-                avgOfBidAndAsk: e.avgOfBidAndAsk,
-              ),
-        );
-        if (e.type == optionTypes.call) {}
-        ref.read(spots.notifier).state.add(spotData);
-      }
-    });
+    for (double x = 95; x <= 110; x += 1) {
+      double profit = 0;
+      ref.watch(optionsContractProvider).forEach((e) {
+        log("$e");
+        profit = ref.read(optionsContractProvider.notifier).calculateProfitLoss(
+              type: e.type,
+              x: x,
+              strikePrice: e.strikePrice,
+              avgOfBidAndAsk: e.avgOfBidAndAsk,
+            );
+      });
+      FlSpot spotData = FlSpot(x, profit);
+      ref.read(spots.notifier).state.add(spotData);
+    }
   }
 }
