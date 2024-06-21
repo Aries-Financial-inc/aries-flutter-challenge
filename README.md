@@ -16,9 +16,11 @@ This project implements an iOS & Android front-end application for options strat
 
 ## Screenshots
 
-[Screenshot 1](assets/images/1%20(2).png)
-[Screenshot 2](assets/images/1%20(3).png)
-[Screenshot 3](assets/images/1%20(1).png)
+[Screenshot 1](assets/images/1%20(2).jpg)
+
+[Screenshot 2](assets/images/1%20(3).jpg)
+
+[Screenshot 3](assets/images/1%20(1).jpg)
 
 ## Demo Video
 
