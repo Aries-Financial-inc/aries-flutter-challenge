@@ -16,18 +16,23 @@ No Jank found, App can run smoothly at 60-FPS
 #### Clean architecture along with SOLID principles has been utilised
 
 ###     View
+        lib/risk_reward_graph/screen
         Strictly only UI elements (No state or logic here)
 
 ###     Controller
+        lib/risk_reward_graph/controller
         Handles the UI state and logic
 
 ###     Repository
+        lib/risk_reward_graph/repo
         controls the data flow
 
 ###     Model
+        lib/risk_reward_graph/model
         data classes
 
 ###     Service
+        lib/risk_reward_graph/services
         fetches data from various sources 
 
 #### State management used: GET-X
