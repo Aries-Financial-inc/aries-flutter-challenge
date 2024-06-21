@@ -16,6 +16,12 @@ This project implements an iOS & Android front-end application for options strat
 - **Customizable Settings**: Users can enable or disable chart behaviors through a settings dialog.
 - **Detailed Analysis**: Displays maximum profit, maximum loss, and break-even points for the given options strategy.
 
+
+## Demo Video
+
+![demo 4](assets/record.gif)
+
+
 ## Screenshots
 
 ![Screenshot 1](assets/images/1%20(3).jpg)
@@ -23,11 +29,6 @@ This project implements an iOS & Android front-end application for options strat
 ![Screenshot 3](assets/images/1%20(4).jpg)
 ![Screenshot 4](assets/images/1%20(2).jpg)
 
-
-## Demo Video
-
-You can watch a detailed demo of the application [here](assets/record.gif)
-![demo 4](assets/record.gif)
 
 ## Installation
 
