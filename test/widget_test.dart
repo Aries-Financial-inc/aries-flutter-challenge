@@ -9,22 +9,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_challenge/main.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Profit/loss graph is properly displayed',
+      (WidgetTester tester) async {
+    final optionsData = [
+      {
+        "strike_price": 100,
+        "type": "Call",
+        "bid": 10.05,
+        "ask": 12.04,
+        "long_short": "long",
+        "expiration_date": "2025-12-17T00:00:00Z"
+      },
+    ];
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: OptionsCalculator(optionsData: optionsData),
+      ),
+    );
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Options Profit Calculator'), findsOneWidget);
+    expect(find.byType(SfCartesianChart), findsOneWidget);
   });
 }

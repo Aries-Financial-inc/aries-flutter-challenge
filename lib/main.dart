@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'option_contract.dart';
 
 void main() {
   runApp(const MyApp());
@@ -64,14 +66,14 @@ class OptionsCalculator extends StatefulWidget {
 
 class _OptionsCalculatorState extends State<OptionsCalculator> {
   List<Map<String, dynamic>> optionsData = [];
+  late List<OptionContract> contracts;
 
   @override
   void initState() {
     super.initState();
     optionsData = widget.optionsData;
+    contracts = OptionContract.fromJson(widget.optionsData);
   }
-
-  // Your code here
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +82,37 @@ class _OptionsCalculatorState extends State<OptionsCalculator> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Options Profit Calculator"),
       ),
-      body: const Text("Your code here")
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 400,
+              child: SfCartesianChart(
+                legend: const Legend(isVisible: true),
+                tooltipBehavior: TooltipBehavior(enable: true),
+                series: <CartesianSeries<double, int>>[
+                  LineSeries<double, int>(
+                    dataSource: contracts.getChartData(),
+                    xValueMapper: (_, x) => x,
+                    yValueMapper: (data, _) => data,
+                    name: 'Risk & reward graph',
+                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text("Max Profit: ${contracts.getMaxProfit()}"),
+            Text("Max Loss: ${contracts.getMaxLoss()}"),
+            Text(
+              "Break Even Points: ${contracts.getBreakEvenPoints().join(", ")}",
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
