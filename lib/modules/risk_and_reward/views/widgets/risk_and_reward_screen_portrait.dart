@@ -22,10 +22,8 @@ class RiskAndRewardScreenPortrait extends StatelessWidget {
           appBar: AppBar(
             title: const Text(
               'Options Profit Calculator',
-              style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
             ),
             centerTitle: true,
             flexibleSpace: Container(
