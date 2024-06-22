@@ -21,7 +21,7 @@ class RiskAndRewardScreenPortrait extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text(
-              'Risk and Reward',
+              'Options Profit Calculator',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             centerTitle: true,
