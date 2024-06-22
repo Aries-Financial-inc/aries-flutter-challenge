@@ -31,7 +31,6 @@ class RiskAndRewardScreenPortrait extends StatelessWidget {
 
   Widget buildChartWidget() {
     final state = _controller.state;
-    debugPrint('state.spots: ${state.spots}');
 
     final data = state.spots.map((spot) => ProfitLossPoint(spot.x, spot.y)).toList();
 
