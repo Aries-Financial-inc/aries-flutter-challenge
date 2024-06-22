@@ -34,9 +34,9 @@ void main(List<String> arguments) {
   final initialDialog = CLI_Dialog(listQuestions: listQuestions);
   final answer = initialDialog.ask();
   final task = answer['task'];
-  Task _task = Task.values.firstWhere((element) => element.label == task);
+  Task task0 = Task.values.firstWhere((element) => element.label == task);
 
-  switch (_task) {
+  switch (task0) {
     case Task.module:
       final moduleDialog = CLI_Dialog(questions: [
         ['Enter the new module name?', 'name']
@@ -369,11 +369,11 @@ Future<void> _createModelInModule(String modelData) async {
     printToConsole('Invalid input');
   } else {
     String moduleName = params.first;
-    String _modelName =
+    String modelName0 =
         params[1].replaceAll('model', '').replaceAll('state', '');
 
-    String modelName = '${_toUpperCamelCase(_modelName)}Model';
-    String modelFileName = '${_modelName}_model';
+    String modelName = '${_toUpperCamelCase(modelName0)}Model';
+    String modelFileName = '${modelName0}_model';
     String modelPath = '$baseModulePath/$moduleName/data/models';
 
     await _createModel(

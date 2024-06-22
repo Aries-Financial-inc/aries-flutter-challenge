@@ -20,8 +20,17 @@ RiskAndRewardState _$RiskAndRewardStateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RiskAndRewardState {
+  List<OptionModel> get options => throw _privateConstructorUsedError;
+  double get maxProfit => throw _privateConstructorUsedError;
+  double get maxLoss => throw _privateConstructorUsedError;
+  List<double> get breakEvenPoints => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  String? get id => throw _privateConstructorUsedError;
+  @FlSpotConverter()
+  List<FlSpot> get spots => throw _privateConstructorUsedError;
+  double get minX => throw _privateConstructorUsedError;
+  double get maxX => throw _privateConstructorUsedError;
+  double get minY => throw _privateConstructorUsedError;
+  double get maxY => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +44,17 @@ abstract class $RiskAndRewardStateCopyWith<$Res> {
           RiskAndRewardState value, $Res Function(RiskAndRewardState) then) =
       _$RiskAndRewardStateCopyWithImpl<$Res, RiskAndRewardState>;
   @useResult
-  $Res call({bool isLoading, String? id});
+  $Res call(
+      {List<OptionModel> options,
+      double maxProfit,
+      double maxLoss,
+      List<double> breakEvenPoints,
+      bool isLoading,
+      @FlSpotConverter() List<FlSpot> spots,
+      double minX,
+      double maxX,
+      double minY,
+      double maxY});
 }
 
 /// @nodoc
@@ -51,18 +70,58 @@ class _$RiskAndRewardStateCopyWithImpl<$Res, $Val extends RiskAndRewardState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? options = null,
+    Object? maxProfit = null,
+    Object? maxLoss = null,
+    Object? breakEvenPoints = null,
     Object? isLoading = null,
-    Object? id = freezed,
+    Object? spots = null,
+    Object? minX = null,
+    Object? maxX = null,
+    Object? minY = null,
+    Object? maxY = null,
   }) {
     return _then(_value.copyWith(
+      options: null == options
+          ? _value.options
+          : options // ignore: cast_nullable_to_non_nullable
+              as List<OptionModel>,
+      maxProfit: null == maxProfit
+          ? _value.maxProfit
+          : maxProfit // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxLoss: null == maxLoss
+          ? _value.maxLoss
+          : maxLoss // ignore: cast_nullable_to_non_nullable
+              as double,
+      breakEvenPoints: null == breakEvenPoints
+          ? _value.breakEvenPoints
+          : breakEvenPoints // ignore: cast_nullable_to_non_nullable
+              as List<double>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+      spots: null == spots
+          ? _value.spots
+          : spots // ignore: cast_nullable_to_non_nullable
+              as List<FlSpot>,
+      minX: null == minX
+          ? _value.minX
+          : minX // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxX: null == maxX
+          ? _value.maxX
+          : maxX // ignore: cast_nullable_to_non_nullable
+              as double,
+      minY: null == minY
+          ? _value.minY
+          : minY // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxY: null == maxY
+          ? _value.maxY
+          : maxY // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -75,7 +134,17 @@ abstract class _$$RiskAndRewardStateImplCopyWith<$Res>
       __$$RiskAndRewardStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? id});
+  $Res call(
+      {List<OptionModel> options,
+      double maxProfit,
+      double maxLoss,
+      List<double> breakEvenPoints,
+      bool isLoading,
+      @FlSpotConverter() List<FlSpot> spots,
+      double minX,
+      double maxX,
+      double minY,
+      double maxY});
 }
 
 /// @nodoc
@@ -89,18 +158,58 @@ class __$$RiskAndRewardStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? options = null,
+    Object? maxProfit = null,
+    Object? maxLoss = null,
+    Object? breakEvenPoints = null,
     Object? isLoading = null,
-    Object? id = freezed,
+    Object? spots = null,
+    Object? minX = null,
+    Object? maxX = null,
+    Object? minY = null,
+    Object? maxY = null,
   }) {
     return _then(_$RiskAndRewardStateImpl(
+      options: null == options
+          ? _value._options
+          : options // ignore: cast_nullable_to_non_nullable
+              as List<OptionModel>,
+      maxProfit: null == maxProfit
+          ? _value.maxProfit
+          : maxProfit // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxLoss: null == maxLoss
+          ? _value.maxLoss
+          : maxLoss // ignore: cast_nullable_to_non_nullable
+              as double,
+      breakEvenPoints: null == breakEvenPoints
+          ? _value._breakEvenPoints
+          : breakEvenPoints // ignore: cast_nullable_to_non_nullable
+              as List<double>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+      spots: null == spots
+          ? _value._spots
+          : spots // ignore: cast_nullable_to_non_nullable
+              as List<FlSpot>,
+      minX: null == minX
+          ? _value.minX
+          : minX // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxX: null == maxX
+          ? _value.maxX
+          : maxX // ignore: cast_nullable_to_non_nullable
+              as double,
+      minY: null == minY
+          ? _value.minY
+          : minY // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxY: null == maxY
+          ? _value.maxY
+          : maxY // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -110,20 +219,77 @@ class __$$RiskAndRewardStateImplCopyWithImpl<$Res>
 class _$RiskAndRewardStateImpl
     with DiagnosticableTreeMixin
     implements _RiskAndRewardState {
-  _$RiskAndRewardStateImpl({this.isLoading = false, this.id});
+  _$RiskAndRewardStateImpl(
+      {final List<OptionModel> options = const [],
+      this.maxProfit = 0,
+      this.maxLoss = 0,
+      final List<double> breakEvenPoints = const [],
+      this.isLoading = false,
+      @FlSpotConverter() final List<FlSpot> spots = const [],
+      this.minX = 0,
+      this.maxX = 0,
+      this.minY = 0,
+      this.maxY = 0})
+      : _options = options,
+        _breakEvenPoints = breakEvenPoints,
+        _spots = spots;
 
   factory _$RiskAndRewardStateImpl.fromJson(Map<String, dynamic> json) =>
       _$$RiskAndRewardStateImplFromJson(json);
 
+  final List<OptionModel> _options;
+  @override
+  @JsonKey()
+  List<OptionModel> get options {
+    if (_options is EqualUnmodifiableListView) return _options;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_options);
+  }
+
+  @override
+  @JsonKey()
+  final double maxProfit;
+  @override
+  @JsonKey()
+  final double maxLoss;
+  final List<double> _breakEvenPoints;
+  @override
+  @JsonKey()
+  List<double> get breakEvenPoints {
+    if (_breakEvenPoints is EqualUnmodifiableListView) return _breakEvenPoints;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_breakEvenPoints);
+  }
+
   @override
   @JsonKey()
   final bool isLoading;
+  final List<FlSpot> _spots;
   @override
-  final String? id;
+  @JsonKey()
+  @FlSpotConverter()
+  List<FlSpot> get spots {
+    if (_spots is EqualUnmodifiableListView) return _spots;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_spots);
+  }
+
+  @override
+  @JsonKey()
+  final double minX;
+  @override
+  @JsonKey()
+  final double maxX;
+  @override
+  @JsonKey()
+  final double minY;
+  @override
+  @JsonKey()
+  final double maxY;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RiskAndRewardState(isLoading: $isLoading, id: $id)';
+    return 'RiskAndRewardState(options: $options, maxProfit: $maxProfit, maxLoss: $maxLoss, breakEvenPoints: $breakEvenPoints, isLoading: $isLoading, spots: $spots, minX: $minX, maxX: $maxX, minY: $minY, maxY: $maxY)';
   }
 
   @override
@@ -131,8 +297,16 @@ class _$RiskAndRewardStateImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'RiskAndRewardState'))
+      ..add(DiagnosticsProperty('options', options))
+      ..add(DiagnosticsProperty('maxProfit', maxProfit))
+      ..add(DiagnosticsProperty('maxLoss', maxLoss))
+      ..add(DiagnosticsProperty('breakEvenPoints', breakEvenPoints))
       ..add(DiagnosticsProperty('isLoading', isLoading))
-      ..add(DiagnosticsProperty('id', id));
+      ..add(DiagnosticsProperty('spots', spots))
+      ..add(DiagnosticsProperty('minX', minX))
+      ..add(DiagnosticsProperty('maxX', maxX))
+      ..add(DiagnosticsProperty('minY', minY))
+      ..add(DiagnosticsProperty('maxY', maxY));
   }
 
   @override
@@ -140,14 +314,35 @@ class _$RiskAndRewardStateImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RiskAndRewardStateImpl &&
+            const DeepCollectionEquality().equals(other._options, _options) &&
+            (identical(other.maxProfit, maxProfit) ||
+                other.maxProfit == maxProfit) &&
+            (identical(other.maxLoss, maxLoss) || other.maxLoss == maxLoss) &&
+            const DeepCollectionEquality()
+                .equals(other._breakEvenPoints, _breakEvenPoints) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.id, id) || other.id == id));
+            const DeepCollectionEquality().equals(other._spots, _spots) &&
+            (identical(other.minX, minX) || other.minX == minX) &&
+            (identical(other.maxX, maxX) || other.maxX == maxX) &&
+            (identical(other.minY, minY) || other.minY == minY) &&
+            (identical(other.maxY, maxY) || other.maxY == maxY));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, id);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_options),
+      maxProfit,
+      maxLoss,
+      const DeepCollectionEquality().hash(_breakEvenPoints),
+      isLoading,
+      const DeepCollectionEquality().hash(_spots),
+      minX,
+      maxX,
+      minY,
+      maxY);
 
   @JsonKey(ignore: true)
   @override
@@ -165,16 +360,42 @@ class _$RiskAndRewardStateImpl
 }
 
 abstract class _RiskAndRewardState implements RiskAndRewardState {
-  factory _RiskAndRewardState({final bool isLoading, final String? id}) =
-      _$RiskAndRewardStateImpl;
+  factory _RiskAndRewardState(
+      {final List<OptionModel> options,
+      final double maxProfit,
+      final double maxLoss,
+      final List<double> breakEvenPoints,
+      final bool isLoading,
+      @FlSpotConverter() final List<FlSpot> spots,
+      final double minX,
+      final double maxX,
+      final double minY,
+      final double maxY}) = _$RiskAndRewardStateImpl;
 
   factory _RiskAndRewardState.fromJson(Map<String, dynamic> json) =
       _$RiskAndRewardStateImpl.fromJson;
 
   @override
+  List<OptionModel> get options;
+  @override
+  double get maxProfit;
+  @override
+  double get maxLoss;
+  @override
+  List<double> get breakEvenPoints;
+  @override
   bool get isLoading;
   @override
-  String? get id;
+  @FlSpotConverter()
+  List<FlSpot> get spots;
+  @override
+  double get minX;
+  @override
+  double get maxX;
+  @override
+  double get minY;
+  @override
+  double get maxY;
   @override
   @JsonKey(ignore: true)
   _$$RiskAndRewardStateImplCopyWith<_$RiskAndRewardStateImpl> get copyWith =>

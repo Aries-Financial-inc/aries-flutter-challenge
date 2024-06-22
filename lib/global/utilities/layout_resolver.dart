@@ -4,10 +4,10 @@ class LayoutResolver extends StatelessWidget {
   final Widget landscapeWidget;
   final Widget portraitWidget;
   const LayoutResolver({
-    Key? key,
+    super.key,
     required this.landscapeWidget,
     required this.portraitWidget,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
