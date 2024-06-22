@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_challenge/modules/risk_and_reward/data/models/profit_loss_point_model.dart';
 import 'package:flutter_challenge/modules/risk_and_reward/domain/controllers/risk_and_reward_controller.dart';
 import 'package:flutter_challenge/modules/risk_and_reward/data/models/risk_and_reward_state_model.dart';
-import 'package:community_charts_flutter/community_charts_flutter.dart' as charts;
+import 'package:community_charts_flutter/community_charts_flutter.dart'
+    as charts;
 import 'package:get/get.dart';
 
 class RiskAndRewardScreenPortrait extends StatelessWidget {
@@ -19,7 +20,7 @@ class RiskAndRewardScreenPortrait extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Risk and Reward Portrait'),
+            title: const Text('Risk and Reward'),
           ),
           body: state.isLoading
               ? const Center(child: CircularProgressIndicator())
@@ -32,7 +33,8 @@ class RiskAndRewardScreenPortrait extends StatelessWidget {
   Widget buildChartWidget() {
     final state = _controller.state;
 
-    final data = state.spots.map((spot) => ProfitLossPoint(spot.x, spot.y)).toList();
+    final data =
+        state.spots.map((spot) => ProfitLossPoint(spot.x, spot.y)).toList();
 
     List<charts.Series<ProfitLossPoint, double>> series = [
       charts.Series<ProfitLossPoint, double>(
@@ -56,24 +58,41 @@ class RiskAndRewardScreenPortrait extends StatelessWidget {
             ProfitLossPoint(breakEvenPoint, state.minY),
             ProfitLossPoint(breakEvenPoint, state.maxY),
           ],
-          dashPatternFn: (_, __) => [4, 4], // Dotted line pattern
+          dashPatternFn: (_, __) => [4, 4],
         ),
       );
     }
+
+    // Calculate the margin for the axes
+    final double xMargin = (state.maxX - state.minX) * 0.2;
+    final double yMargin = (state.maxY - state.minY) * 0.2;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Expanded(
+          SizedBox(
+            height: 500,
             child: charts.LineChart(
               series,
               animate: true,
               domainAxis: charts.NumericAxisSpec(
-                viewport: charts.NumericExtents(state.minX, state.maxX),
+                viewport: charts.NumericExtents(
+                    state.minX - xMargin, state.maxX + xMargin),
+                tickProviderSpec: charts.BasicNumericTickProviderSpec(
+                  desiredTickCount:
+                      ((state.maxX - state.minX + 2 * xMargin) / 0.5).ceil(),
+                  zeroBound: false,
+                ),
               ),
               primaryMeasureAxis: charts.NumericAxisSpec(
-                viewport: charts.NumericExtents(state.minY, state.maxY),
+                viewport: charts.NumericExtents(
+                    state.minY - yMargin, state.maxY + yMargin),
+                tickProviderSpec: charts.BasicNumericTickProviderSpec(
+                  desiredTickCount:
+                      ((state.maxY - state.minY + 2 * yMargin) / 0.5).ceil(),
+                  zeroBound: false,
+                ),
               ),
               behaviors: [
                 charts.ChartTitle('Underlying Price',
@@ -98,33 +117,22 @@ class RiskAndRewardScreenPortrait extends StatelessWidget {
                 ),
                 charts.RangeAnnotation([
                   charts.LineAnnotationSegment(
-                    state.maxProfit,
-                    charts.RangeAnnotationAxisType.measure,
-                    startLabel: 'Max Profit',
-                    labelAnchor: charts.AnnotationLabelAnchor.end,
-                    color: charts.MaterialPalette.green.shadeDefault,
-                  ),
+                      state.maxProfit, charts.RangeAnnotationAxisType.measure,
+                      startLabel:
+                          'Max Profit: ${state.maxProfit == double.infinity ? 'Unlimited' : state.maxProfit.toStringAsFixed(2)}',
+                      labelAnchor: charts.AnnotationLabelAnchor.start,
+                      color: charts.MaterialPalette.green.shadeDefault,
+                      dashPattern: [4, 4],
+                      strokeWidthPx: 3),
                   charts.LineAnnotationSegment(
-                    state.maxLoss,
-                    charts.RangeAnnotationAxisType.measure,
-                    startLabel: 'Max Loss',
-                    labelAnchor: charts.AnnotationLabelAnchor.start,
-                    color: charts.MaterialPalette.red.shadeDefault,
-                  ),
+                      state.maxLoss, charts.RangeAnnotationAxisType.measure,
+                      startLabel:
+                          'Max Loss: ${state.maxLoss == double.infinity ? 'Unlimited' : state.maxLoss.toStringAsFixed(2)}',
+                      labelAnchor: charts.AnnotationLabelAnchor.start,
+                      color: charts.MaterialPalette.red.shadeDefault,
+                      dashPattern: [4, 4],
+                      strokeWidthPx: 3),
                 ]),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                    'Max Profit: ${state.maxProfit == double.infinity ? 'Unlimited' : state.maxProfit}'),
-                Text(
-                    'Max Loss: ${state.maxLoss == double.infinity ? 'Unlimited' : state.maxLoss}'),
-                Text('Break-Even Points: ${state.breakEvenPoints.join(', ')}'),
               ],
             ),
           ),
